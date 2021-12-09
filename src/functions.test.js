@@ -24,7 +24,6 @@ test('Validation start date', () => {
     const closeHour=14;
     const tiempoTranscurrido = Date.now();
     const hoy = new Date(tiempoTranscurrido);
-    //hoy.setDate(hoy.getDate()-1);
     //Act
     const result = createEvent(weekday,week,openHour,closeHour);
     //arrange
@@ -32,7 +31,17 @@ test('Validation start date', () => {
 });
 
 test('Validation date', () => {
-   //TODO: hacer las verificaciones
+    const weekday = "mon";
+    const week=1;
+    const openHour=8;
+    const closeHour=14;
+    const tiempoTranscurrido = Date.now();
+    const hoy = new Date(tiempoTranscurrido);
+    const options = { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }
+    //Act
+    const result = createEvent(weekday,week,openHour,closeHour);
+    //arrange
+    expect(result.date).toEqual(new Date(hoy).toLocaleDateString('es-ES', options));
 });
 
 
