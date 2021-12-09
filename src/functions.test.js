@@ -31,6 +31,7 @@ test('Validation start date', () => {
 });
 
 test('Validation date', () => {
+    //Arrange
     const weekday = "mon";
     const week=1;
     const openHour=8;
@@ -46,7 +47,17 @@ test('Validation date', () => {
 
 
 test('Validation illegal arguments', () => {
-    //TODO: hacer las verificaciones
+    //Arrange
+    const weekday = "uts";
+    const week=-1;
+    const openHour=14;
+    const closeHour=8;
+    //Act
+    const error = () => {
+        createEvent(weekday, week, openHour, closeHour);
+    }
+    //arrange
+    expect(error).toThrow(Error);
 });
 
 
