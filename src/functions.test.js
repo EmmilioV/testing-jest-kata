@@ -26,7 +26,7 @@ test('Validation start date', () => {
     const hoy = new Date(tiempoTranscurrido);
     //Act
     const result = createEvent(weekday,week,openHour,closeHour);
-    //arrange
+    //Assert
     expect(result.start).toEqual(hoy);
 });
 
@@ -41,7 +41,7 @@ test('Validation date', () => {
     const options = { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }
     //Act
     const result = createEvent(weekday,week,openHour,closeHour);
-    //arrange
+    //Assert
     expect(result.date).toEqual(new Date(hoy).toLocaleDateString('es-ES', options));
 });
 
@@ -56,11 +56,96 @@ test('Validation illegal arguments', () => {
     const error = () => {
         createEvent(weekday, week, openHour, closeHour);
     }
-    //arrange
+    //Assert
     expect(error).toThrow(Error);
 });
 
 
 test('create an event list of at least 10 events', () => {
-    //TODO: hacer las verificaciones
+    //Arrange
+    const events = [
+        {
+            weekday:"mon",
+            week:1,
+            openHour:10,
+            closeHour:12
+        },
+        {
+            weekday:"tue",
+            week:1,
+            openHour:10,
+            closeHour:12
+        },
+        {
+            weekday:"wed",
+            week:1,
+            openHour:10,
+            closeHour:12
+        },
+        {
+            weekday:"thu",
+            week:1,
+            openHour:10,
+            closeHour:12
+        },
+        {
+            weekday:"fri",
+            week:1,
+            openHour:10,
+            closeHour:12
+        },
+        {
+            weekday:"sat",
+            week:1,
+            openHour:10,
+            closeHour:12
+        },
+        {
+            weekday:"sun",
+            week:1,
+            openHour:10,
+            closeHour:12
+        },
+        {
+            weekday:"mon",
+            week:1,
+            openHour:10,
+            closeHour:12
+        },
+        {
+            weekday:"fri",
+            week:1,
+            openHour:10,
+            closeHour:12
+        },
+        {
+            weekday:"wed",
+            week:1,
+            openHour:10,
+            closeHour:12
+        },
+        {
+            weekday:"mon",
+            week:1,
+            openHour:10,
+            closeHour:12
+        }
+    ];
+    //Act
+    var results = [];
+    events.forEach(evento => {
+        const result = createEvent(
+            evento.weekday,
+            evento.week,
+            evento.openHour,
+            evento.closeHour);
+        results.push(result);
+    });
+    //Assert
+    results.forEach(result => {
+            expect(result.title).toBe("[SOFKA U] Meeting Room");
+            expect(result.description).toBe("Mentoring and Practice");
+            expect(result.duration).toEqual([2, "hour"])
+        }
+    );
 });
